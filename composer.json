@@ -1,0 +1,34 @@
+{
+    "name": "Ampersand/HmacMiddleware",
+    "description": "HMAC Authorization Middleware",
+    "license": "GPLv3",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Mathias Bauer",
+            "email": "info@mbauer.eu"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "/Users/mbauer/workspace/spielwiese/HMAC"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "Ampersand/HMAC": "*",
+        "slim/slim": "2.*",
+        "symfony/yaml": "2.5.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.2.*",
+        "ptrofimov/xpmock": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ampersand\\": "src/",
+            "Ampersand\\Tests\\": "tests/"
+        }
+    }
+}

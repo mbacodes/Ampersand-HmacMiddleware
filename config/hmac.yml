@@ -1,0 +1,10 @@
+enabled: true
+ttl: 2
+keys:
+    apikey: headers|apikey
+    token: headers|token
+    timestamp: headers|timestamp
+    payload: body
+    hmac: headers|hmac
+privateKey: shouldBeTopSecret
+algorithm: sha256
