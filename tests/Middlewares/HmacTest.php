@@ -4,6 +4,7 @@
  * File         HmacTest.php
  *
  * @author      Mathias Bauer <info@mbauer.eu>
+ * @license     GPLv3
  */
 namespace Ampersand\Tests\Middlewares;
 
@@ -16,8 +17,8 @@ use Ampersand\Tests\SlimFrameworkTestCase;
  *
  * Class        HmacTest
  *
- * @author      ${AUTHOR}
- * @copyright   ${COPYRIGHT}
+ * @author      Mathias Bauer <info@mbauer.eu>
+ * @license     GPLv3
  */
 class HmacTest extends SlimFrameworkTestCase
 {

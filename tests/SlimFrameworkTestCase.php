@@ -4,7 +4,7 @@
  * File         Slim_Framework_Test_Case.php
  *
  * @author      Mathias Bauer <info@mbauer.eu>
- * @copyright   ${COPYRIGHT}
+ * @license     GPLv3
  */
 namespace Ampersand\Tests;
 
@@ -16,8 +16,8 @@ use Xpmock\TestCaseTrait;
  *
  * Class        Slim_Framework_Test_Case
  *
- *
  * @author      Mathias Bauer <info@mbauer.eu>
+ * @license     GPLv3
  */
 class SlimFrameworkTestCase extends \PHPUnit_Framework_TestCase
 {

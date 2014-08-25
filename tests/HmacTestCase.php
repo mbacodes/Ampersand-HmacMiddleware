@@ -3,8 +3,8 @@
  *
  * File         HmacTestCase.php
  *
- * @author      ${AUTHOR}
- * @copyright   ${COPYRIGHT}
+ * @author      Mathias Bauer <info@mbauer.eu>
+ * @license     GPLv3
  */
 namespace Ampersand\Tests;
 use Xpmock\TestCaseTrait;
@@ -14,6 +14,9 @@ use Xpmock\TestCaseTrait;
  * Class        HmacTestCase
  *
  * @package     Ampersand\Tests
+ *
+ * @author      Mathias Bauer <info@mbauer.eu>
+ * @license     GPLv3
  *
  */
 class HmacTestCase extends \PHPUnit_Framework_TestCase

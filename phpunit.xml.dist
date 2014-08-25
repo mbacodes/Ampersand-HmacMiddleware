@@ -12,7 +12,7 @@
          bootstrap="vendor/autoload.php"
 >
     <testsuites>
-        <testsuite name="HMAC Middlewares test suite">
+        <testsuite name="HMAC Middleware test suite">
             <directory>./tests/Middlewares</directory>
         </testsuite>
     </testsuites>
