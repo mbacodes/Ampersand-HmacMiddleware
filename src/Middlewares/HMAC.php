@@ -1,16 +1,16 @@
 <?php
 /**
  *
- * File         HMAC.php
+ * File         Hmac.php
  *
  * @author      Mathias Bauer <info@mbauer.eu>
- * @copyright   ${COPYRIGHT}
- * @link        ${LINK}
- * @license     ${LICENSE}
- * @version     ${VERSION}
- * @package     ${PACKAGE}
+ * @license     GPLv3
  */
 namespace Ampersand\Middlewares;
+
+use Ampersand\Auth\HmacManager;
+use Exception;
+use HttpException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Middleware;
@@ -18,18 +18,15 @@ use Symfony\Component\Yaml\Yaml;
 
 /**
  *
- * Class        HMAC
+ * Class        Hmac
  *
  * @package     Ampersand\Middlewares
  *
  * @author      Mathias Bauer <info@mbauer.eu>
- * @copyright   ${COPYRIGHT}
- * @link        ${LINK}
- * @license     ${LICENSE}
- * @version     ${VERSION}
- * @package     ${PACKAGE}
+ * @license     GPLv3
+ *
  */
-class HMAC extends Middleware
+class Hmac extends Middleware
 {
     const KEY_API_KEY   = 'apikey';
     const KEY_TIMESTAMP = 'timestamp';
@@ -70,16 +67,19 @@ class HMAC extends Middleware
          */
         try {
             $this->checkRequestHmac();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // is it a unauthorized exception?
-            if ($e instanceof \HttpException) {
+            if ($e instanceof HttpException) {
                 // check code
                 if ($e->getCode() === 401) {
                     throw $e;
                 } else {
                     // throw server error
-                    throw new \HttpException('500', '500 Internal Server Error', 500);
+                    throw new HttpException('500', '500 Internal Server Error', 500);
                 }
+            } else {
+                // throw server error
+                throw new HttpException('500', '500 Internal Server Error', 500);
             }
         }
 
@@ -99,9 +99,9 @@ class HMAC extends Middleware
          */
         try {
             $this->setResponseHmac();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // throw server error
-            throw new \HttpException('500', '500 Internal Server Error', 500);
+            throw new HttpException('500', '500 Internal Server Error', 500);
         }
 
     }
@@ -179,13 +179,13 @@ class HMAC extends Middleware
     /**
      * Returns a HMAC-object with private key and time to life preset from config
      *
-     * @return \Ampersand\Auth\HMAC
+     * @return \Ampersand\Auth\HmacManager
      */
     private function factory_hmac()
     {
         $this->config = Yaml::parse('config/hmac.yml');
-        /** @var \Ampersand\Auth\HMAC $hmac */
-        $hmac = new \Ampersand\Auth\HMAC();
+        /** @var \Ampersand\Auth\HmacManager $hmac */
+        $hmac = new HmacManager();
         $hmac->setPrivateKey($this->config['privateKey']);
         $hmac->setTtl($this->config['ttl']);
 
@@ -240,7 +240,7 @@ class HMAC extends Middleware
         // this needs to be executed after the encode method has been ran
         if (!$hmac->isValid()) {
             // throw exception so the ApiError Middleware can handle it
-            throw new \HttpException('401', '401 Unauthorized', 401);
+            throw new HttpException('401', '401 Unauthorized', 401);
         }
 
         return true;
@@ -278,7 +278,7 @@ class HMAC extends Middleware
             && $this->check_data_field($data, 'hmac')
         ) {
         } else {
-            throw new \HttpException('500', '500 Internal Server Error', 500);
+            throw new HttpException('500', '500 Internal Server Error', 500);
         }
 
         return $this;
