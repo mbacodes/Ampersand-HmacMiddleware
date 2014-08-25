@@ -4,15 +4,15 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eb0708ef863466b48f75d7c09f12f71b",
+    "hash": "ef172f0c9084e4839ac6a624a17b8a07",
     "packages": [
         {
             "name": "ampersand/hmac-manager",
-            "version": "0.0.1",
+            "version": "0.0.2",
             "source": {
                 "type": "git",
-                "url": "/Users/mbauer/workspace/spielwiese/HmacManager",
-                "reference": "4e76ce1101ae0f7b0291be33f1072ec6e9dc4057"
+                "url": "/Users/mbauer/workspace/spielwiese/Ampersand/hmac-manager",
+                "reference": "cd13e5b53e7f85c8b06915a81db0ec8dd03320c5"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -38,7 +38,7 @@
                 }
             ],
             "description": "HMAC Authorization Manager",
-            "time": "2014-08-24 21:10:12"
+            "time": "2014-08-25 17:52:30"
         },
         {
             "name": "slim/slim",
@@ -137,16 +137,16 @@
     "packages-dev": [
         {
             "name": "ocramius/instantiator",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/Instantiator.git",
-                "reference": "a7abbb5fc9df6e7126af741dd6c140d1a7369435"
+                "reference": "e24a12178906ff2e7471b8aaf3a0eb789b59f881"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/a7abbb5fc9df6e7126af741dd6c140d1a7369435",
-                "reference": "a7abbb5fc9df6e7126af741dd6c140d1a7369435",
+                "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/e24a12178906ff2e7471b8aaf3a0eb789b59f881",
+                "reference": "e24a12178906ff2e7471b8aaf3a0eb789b59f881",
                 "shasum": ""
             },
             "require": {
@@ -188,7 +188,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2014-08-14 15:10:55"
+            "time": "2014-08-25 14:48:16"
         },
         {
             "name": "ocramius/lazy-map",

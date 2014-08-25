@@ -12,7 +12,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "/Users/mbauer/workspace/spielwiese/HmacManager"
+            "url": "git@github.com:MTon/Ampersand-HmacManager.git"
         }
     ],
     "require": {

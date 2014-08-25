@@ -9,7 +9,7 @@
 namespace Ampersand\Tests\Middlewares;
 
 use Ampersand\Middlewares\Hmac;
-use Ampersand\Tests\HmacTestCase;
+use Ampersand\Tests\MiddlewareTestCase;
 use Ampersand\Tests\SlimFrameworkTestCase;
 
 
@@ -20,7 +20,7 @@ use Ampersand\Tests\SlimFrameworkTestCase;
  * @author      Mathias Bauer <info@mbauer.eu>
  * @license     GPLv3
  */
-class HmacTest extends SlimFrameworkTestCase
+class HmacTest extends MiddlewareTestCase
 {
 
     public function testCallMiddleware()

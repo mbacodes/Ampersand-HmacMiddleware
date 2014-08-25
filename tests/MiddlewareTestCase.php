@@ -7,6 +7,9 @@
  * @license     GPLv3
  */
 namespace Ampersand\Tests;
+use Ampersand\Middlewares\Hmac;
+use Slim\Environment;
+use Slim\Slim;
 use Xpmock\TestCaseTrait;
 
 /**
@@ -19,29 +22,46 @@ use Xpmock\TestCaseTrait;
  * @license     GPLv3
  *
  */
-class HmacTestCase extends \PHPUnit_Framework_TestCase
+class MiddlewareTestCase extends \Xpmock\TestCase
 {
     use TestCaseTrait;
 
+    protected $env = array(
+        'SCRIPT_NAME' => '/index.php',
+        'PATH_INFO'   => '/foo',
+        'HTTP_COOKIE' => 'slim_session=1644004961%7CLKkYPwqKIMvBK7MWl6D%2BxeuhLuMaW4quN%2F512ZAaVIY%3D%7Ce0f007fa852c7101e8224bb529e26be4d0dfbd63',
+    );
+
     /**
-     * @var \Ampersand\Http\HeadersInterface
+     * @var \Slim\Slim
+     */
+    protected $app;
+
+
+    /**
+     * @var \Slim\Http\Headers
      */
     protected $headers;
 
     /**
-     * @var \Ampersand\Http\RequestInterface
+     * @var \Slim\Http\Request
      */
     protected $request;
 
     /**
-     * @var \Ampersand\Http\ResponseInterface
+     * @var \Slim\Http\Response
      */
     protected $response;
 
     /**
-     * @var \Ampersand\Http\CookiesInterface
+     * @var \Slim\Http\Cookies
      */
     protected $cookies;
+
+    /**
+     * @var \Ampersand\Auth\HmacManager
+     */
+    protected $hmacManager;
 
 
     // We support these methods for testing. These are available via
@@ -55,55 +75,46 @@ class HmacTestCase extends \PHPUnit_Framework_TestCase
      */
     public function setup()
     {
+        // Mock the Slim Env
+        $this->setupSlimApp();
+        // Establish a local reference to the Slim app object
+       // $this->app = $this->mock('\Slim\Slim');
+
         // Mock the Headers
-        $headers       = $this->getMock('\Ampersand\Http\HeadersInterface');
+        $headers       = $this->mock('\Slim\Http\Headers');
         $this->headers = $headers;
 
         // Mock the Request
-        $request       = $this->getMock('\Ampersand\Http\RequestInterface');
-        //$request->injectTo($this->headers, 'headers');
+        $request       = $this->mock('\Slim\Http\Request');
+        //$this->injectTo($this->headers, 'headers');
         $this->request = $request;
 
         // Mock the Response
-        $response = $this->getMock('\Ampersand\Http\ResponseInterface');
-        //$response->headers($this->headers);
+        $response = $this->mock('\Slim\Http\Response');
+        // $response->injectTo($this->headers, 'headers');
         $this->response = $response;
 
         // Mock the cookies
-        $this->cookies = $this->getMock('\Ampersand\Http\CookiesInterface');
+        $this->cookies = $this->mock('\Slim\Http\Cookies');
 
+        // Mock the HmacManager
+        $this->hmacManager = $this->mock('\Ampersand\Auth\HmacManager');
     }
 
     /**
-     * Test if $this->headers is an instance of Ampersand\Http\HeadersInterface
+     * Test if new Hmac() returns a new instance of \Slim\Middleware
      */
-    public function testHeadersIsInstanceOfHeadersInterface()
+    public function testHmacIsInstanceOfSlimMiddleware()
     {
-        $this->assertInstanceOf('\Ampersand\Http\HeadersInterface', $this->headers);
+        $this->assertInstanceOf('\Slim\Middleware', new Hmac());
     }
 
     /**
-     * Test if $this->request is an instance of Ampersand\Http\RequestInterface
+     * Test if $this->hmacManager is an instance of \Ampersand\Auth\HmacManager
      */
-    public function testRequestIsInstanceOfRequestInterface()
+    public function testHmacIsInstanceOfAmpersandAuthHmacManager()
     {
-        $this->assertInstanceOf('\Ampersand\Http\RequestInterface', $this->request);
-    }
-
-    /**
-     * Test if $this->response is an instance of Ampersand\Http\ResponseInterface
-     */
-    public function testResponseIsInstanceOfResponseInterface()
-    {
-        $this->assertInstanceOf('\Ampersand\Http\ResponseInterface', $this->response);
-    }
-
-    /**
-     * Test if $this->cookies is an instance of Ampersand\Http\CookiesInterface
-     */
-    public function testCookiesIsInstanceOfCookiesInterface()
-    {
-        $this->assertInstanceOf('\Ampersand\Http\CookiesInterface', $this->cookies);
+        $this->assertInstanceOf('\Ampersand\Auth\HmacManager', $this->hmacManager);
     }
 
 
@@ -185,6 +196,24 @@ class HmacTestCase extends \PHPUnit_Framework_TestCase
 
         $extraInfo = $expectedException !== 'Exception' ? " of type $expectedException" : '';
         $this->fail("Failed asserting that exception $extraInfo was thrown.");
+    }
+
+    protected function setupSlimApp($env = null, $appConfig = null)
+    {
+        if ($env === null) {
+            $env = $this->env;
+        }
+        Environment::mock($env);
+        // Initialize our own copy of the slim application
+        if ($appConfig === null) {
+            $appConfig = array(
+                'version'        => '0.0.0',
+                'debug'          => false,
+                'mode'           => 'testing',
+                'templates.path' => __DIR__ . '/../app/templates'
+            );
+        }
+        $this->app = new Slim($appConfig);
     }
 
 
