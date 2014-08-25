@@ -1,4 +1,5 @@
 enabled: true
+useToken: true
 ttl: 2
 keys:
     apikey: headers|apikey

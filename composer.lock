@@ -4,21 +4,22 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ffbeb1ce2da60d0bee953fb6d3d76f72",
+    "hash": "eb0708ef863466b48f75d7c09f12f71b",
     "packages": [
         {
-            "name": "Ampersand/HMAC",
-            "version": "dev-master",
+            "name": "ampersand/hmac-manager",
+            "version": "0.0.1",
             "source": {
                 "type": "git",
-                "url": "/Users/mbauer/workspace/spielwiese/HMAC",
-                "reference": "292907071ff552c80d0ce571f1399054b56eac9d"
+                "url": "/Users/mbauer/workspace/spielwiese/HmacManager",
+                "reference": "4e76ce1101ae0f7b0291be33f1072ec6e9dc4057"
             },
             "require": {
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.2.*"
+                "phpunit/phpunit": "4.2.*",
+                "ptrofimov/xpmock": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -36,8 +37,8 @@
                     "email": "info@mbauer.eu"
                 }
             ],
-            "description": "HMAC Authorization Middleware",
-            "time": "2014-08-21 21:33:11"
+            "description": "HMAC Authorization Manager",
+            "time": "2014-08-24 21:10:12"
         },
         {
             "name": "slim/slim",
@@ -932,7 +933,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "ampersand/hmac": 20,
         "ptrofimov/xpmock": 20
     },
     "prefer-stable": false,

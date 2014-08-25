@@ -1,5 +1,5 @@
 {
-    "name": "Ampersand/HmacMiddleware",
+    "name": "ampersand/hmac-middleware",
     "description": "HMAC Authorization Middleware",
     "license": "GPLv3",
     "minimum-stability": "stable",
@@ -12,12 +12,12 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "/Users/mbauer/workspace/spielwiese/HMAC"
+            "url": "/Users/mbauer/workspace/spielwiese/HmacManager"
         }
     ],
     "require": {
         "php": ">=5.4.0",
-        "Ampersand/HMAC": "*",
+        "ampersand/hmac-manager": "0.0.*",
         "slim/slim": "2.*",
         "symfony/yaml": "2.5.*"
     },

@@ -7,7 +7,7 @@
  */
 namespace Ampersand\Tests\Middlewares;
 
-use Ampersand\Middlewares\HMAC;
+use Ampersand\Middlewares\Hmac;
 use Ampersand\Tests\HmacTestCase;
 use Ampersand\Tests\SlimFrameworkTestCase;
 
@@ -25,7 +25,7 @@ class HmacTest extends SlimFrameworkTestCase
     public function testCallMiddleware()
     {
         $app = $this->app;
-        $app->add(new HMAC());
+        $app->add(new Hmac());
         $app->get('/foo', function () use ($app) {
             echo "Hello";
         });
